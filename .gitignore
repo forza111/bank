@@ -2,7 +2,6 @@
 ### Python template
 .idea/
 
-*secret.py/
 
 
 
@@ -132,4 +131,4 @@ dmypy.json
 .pyre/
 
 
-!/bank/secret.py
+!/secrets/
