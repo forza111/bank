@@ -1,6 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 .idea/
+.bank/secret.py
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -127,5 +129,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-*/bank/secret.py
 
