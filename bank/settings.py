@@ -75,10 +75,23 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+#Default setiing database
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}'''
+
+#create settings to dbbank
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgesql_psycopg2',
+        'NAME': 'dbbank',
+        'USER': 'forza111',
+        'PASSWORD' : 'n94i3k6',
+        'HOST' : '127.0.0.1',
+        'PORT' : '5432'
     }
 }
 
