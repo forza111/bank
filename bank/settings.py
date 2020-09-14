@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 #create settings to dbbank
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgesql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbbank',
         'USER': 'forza111',
         'PASSWORD' : 'n94i3k6',
