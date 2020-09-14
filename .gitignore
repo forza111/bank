@@ -2,7 +2,6 @@
 ### Python template
 .idea/
 
-*secret.py/
 
 
 
@@ -131,5 +130,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
-!/bank/secret.py
+/bank/secret.py

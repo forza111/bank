@@ -1,1 +1,0 @@
-SECRET_KEY = '9da1+i0g!^9(a@@!1&8fwkzu%+hh9ufhnddv5ucuzusm0#pst4'
