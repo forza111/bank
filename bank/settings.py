@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbbank',
-        'USER': 'forza111',
-        'PASSWORD' : 'n94i3k6',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
+        'NAME': 'myprojectbd',
+        'USER': 'myprojectuser',
+        'PASSWORD' : 'password',
+        'HOST' : 'localhost',
+        'PORT' : ''
     }
 }
 
