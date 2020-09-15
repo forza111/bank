@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from secrets.secret import SECRET_KEY
+
+from bank.secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,16 +85,7 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 }'''
 
 #create settings to dbbank
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myprojectbd',
-        'USER': 'myprojectuser',
-        'PASSWORD' : 'password',
-        'HOST' : 'localhost',
-        'PORT' : ''
-    }
-}
+DATABASES = DATABASES
 
 
 # Password validation
