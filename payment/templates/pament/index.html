@@ -2,8 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HELLOW WORLD</title>
+    <title></title>
 </head>
+{% if latest_user_list %}
+<ul>
+{% for user in latest_user_list %}
+<li><a href="/payment/{{ user.id }}/"> {{ user.username }}</a></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<p>No user </p>
+{% endif %}
+
+
 <body>
 
 </body>
