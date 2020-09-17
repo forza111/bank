@@ -7,10 +7,19 @@ from django.template import loader
 
 from .models import User,Balance,Credit
 
-def index(request):
+'''def index(request):
     latest_user_list = User.objects.all()
     template = loader.get_template('payment/index.html')
-    context = {'latest_user_list': latest_user_list}
-    return HttpResponse(template.render(context, request))
+    context = {'latest_user_list': latest_user_list,}
+    return HttpResponse(template.render(context, request))'''
+class IndexView(generic.ListView):
+    template_name = 'payment/index.html'
+    context_object_name = 'latest_user_list'
+    def get_queryset(self):
+        return User.objects.all()
+
+class DetailView(generic.DetailView):
+    model = Balance
+    template_name = 'payment/detail.html'
 
 
