@@ -29,8 +29,10 @@ def detail(requset, user_id):
                       {
                           'user' : user,
                           'error_message': '{} not balance'.format(user),
-                      'credit':credit,
-                      'check_credit':check_credit})
+                          'credit':credit,
+                          'check_credit':check_credit
+                      }
+                      )
     else:
         return render(requset, 'payment/detail.html',
                       {'user': user, 'balance' : balance,'credit':credit,
