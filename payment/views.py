@@ -7,41 +7,30 @@ from django.template import loader
 
 from .models import User,Balance,Credit
 
-'''def index(request):
-    latest_user_list = User.objects.all()
-    template = loader.get_template('payment/index.html')
-    context = {'latest_user_list': latest_user_list,}
-    return HttpResponse(template.render(context, request))'''
 class IndexView(generic.ListView):
+    '''Shows userlist'''
     template_name = 'payment/index.html'
     context_object_name = 'latest_user_list'
     def get_queryset(self):
         return User.objects.all()
 
 def detail(requset, user_id):
+    '''
+    Shows information about user balance and credit balance.
+    check_credit test the user has a credit and output  True or False'''
     user = get_object_or_404(User, pk=user_id)
     check_credit = Credit.objects.filter(user = user).exists()
-    credit = Credit.objects.filter(user = user)
     try:
         balance = Balance.objects.get(user = user)
     except(KeyError,Balance.DoesNotExist):
         return render(requset, 'payment/detail.html',
                       {
                           'user' : user,
-                          'error_message': '{} not balance'.format(user),
-                          'credit':credit,
+                          'error_message': 'У пользователя {} нет открытого счета в банке'.format(user),
                           'check_credit':check_credit
                       }
                       )
     else:
         return render(requset, 'payment/detail.html',
-                      {'user': user, 'balance' : balance,'credit':credit,
+                      {'user': user, 'balance' : balance,
                       'check_credit':check_credit} )
-
-
-'''def detail(reqest, user_id):
-    try:
-        user = User.objects.get(pk=user_id)
-    except User.DoesNotExist:
-        raise Http404('No NO Noo')
-    return render(reqest, 'payment/detail.html', {'user' : user})'''

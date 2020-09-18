@@ -15,7 +15,7 @@ class User(models.Model):
 
 class Balance(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    balance_rub = models.IntegerField(max_length=50, default=0)
+    balance_rub = models.IntegerField(max_length=50, default=0,name='rub')
     balance_dol = models.IntegerField(max_length=50, default=0)
     balance_eur = models.IntegerField(max_length=50, default=0)
     def __str__(self):

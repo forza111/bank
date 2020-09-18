@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
-<h1>{{user.username}}</h1>
-{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif%}
-<p>{{balance}}</p>
-{% if check_credit %}<p>{{credit}}</p>{%endif%}
+<h1>{{user.username.title}}</h1>
+<h4>Информация по доступным средствам</h4>
+{% if error_message %}<p>{{error_message}}</p>{% endif%}
+<p>{{balance.balance_rub}} рублей</p>
+
+<h4>Информация по кредитам</h4>
+{% if check_credit %}
+<p>У вас имеется кредит по:</p>
+{% for credit in user.credit_set.all %}
+<ul><li>{{ credit.name_credit }}</li></ul>
+{% endfor %}
+{% else %}<p>У вас нет кредитов</p>
+{%endif%}
 
 
 
