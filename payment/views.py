@@ -32,5 +32,5 @@ def detail(requset, user_id):
                       )
     else:
         return render(requset, 'payment/detail.html',
-                      {'user': user, 'balance' : balance,
+                      {'user': user,'balance' : balance,
                       'check_credit':check_credit} )

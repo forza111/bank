@@ -6,8 +6,12 @@
 </head>
 <h1>{{user.username.title}}</h1>
 <h4>Информация по доступным средствам</h4>
-{% if error_message %}<p>{{error_message}}</p>{% endif%}
+{% if error_message %}<p>{{error_message}}</p>
+{% else %}
 <p>{{balance.balance_rub}} рублей</p>
+<p>{{balance.balance_dol}} $</p>
+<p>{{balance.balance_eur}} EUR</p>
+{% endif%}
 
 <h4>Информация по кредитам</h4>
 {% if check_credit %}
