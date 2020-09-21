@@ -8,8 +8,8 @@
 <h4>Информация по доступным средствам</h4>
 {% if error_message %}<p>{{error_message}}</p>
 {% else %}
-<p>{{balance.balance_rub}} рублей</p>
-<p>{{balance.balance_dol}} $</p>
+<p>{{balance.balance_rub}} RUB</p>
+<p>{{balance.balance_dol}} USD</p>
 <p>{{balance.balance_eur}} EUR</p>
 {% endif%}
 
@@ -17,7 +17,10 @@
 {% if check_credit %}
 <p>У вас имеется кредит по:</p>
 {% for credit in user.credit_set.all %}
-<ul><li>{{ credit.name_credit }}</li></ul>
+<ul><li>{{ credit.name_credit }}
+    {{ credit.credit }} RUB
+<a href="{% url 'payment:credit_repayment' %}"> Внести средства</a>
+</li></ul>
 {% endfor %}
 {% else %}<p>У вас нет кредитов</p>
 {%endif%}
