@@ -19,7 +19,7 @@
 {% for credit in user.credit_set.all %}
 <ul><li>{{ credit.name_credit }}
     {{ credit.credit }} RUB
-<a href="{% url 'payment:credit_repayment' %}"> Внести средства</a>
+<a href="{% url 'payment:credit_repayment' user.id %}"> Внести средства</a>
 </li></ul>
 {% endfor %}
 {% else %}<p>У вас нет кредитов</p>
