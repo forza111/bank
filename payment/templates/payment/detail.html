@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<h1>{{user.username.title}}</h1>
+{% extends 'payment/base.html' %}
+{% block title %}
+detail
+{% endblock %}
+
+{% block page_title %}
+{{user.username.title}}
+{% endblock %}
+
+{% block content %}
 <h4>Информация по доступным средствам</h4>
 {% if error_message %}<p>{{error_message}}</p>
 {% else %}
@@ -15,20 +18,14 @@
 
 <h4>Информация по кредитам</h4>
 {% if check_credit %}
-<p>У вас имеется кредит по:</p>
+<p>У вас имееются следующие кредиты:</p>
 {% for credit in user.credit_set.all %}
 <ul><li>{{ credit.name_credit }}
     {{ credit.credit }} RUB
-<a href="{% url 'payment:credit_repayment' user.id %}"> Внести средства</a>
+<a href="{% url 'payment:credit_repayment' credit.id %}"> Внести средства</a>
 </li></ul>
 {% endfor %}
 {% else %}<p>У вас нет кредитов</p>
 {%endif%}
 
-
-
-
-<body>
-
-</body>
-</html>
+{% endblock %}

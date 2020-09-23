@@ -36,7 +36,9 @@ def detail(requset, user_id):
                       'check_credit':check_credit} )
 def credit_repayment(requset, user_id):
     user = get_object_or_404(User, pk=user_id)
+
     check_credit = Credit.objects.filter(user = user).exists()
     return render(requset, 'payment/credit_repayment.html',
                   {'user': user,
-                   'check_credit': check_credit})
+                   'check_credit': check_credit,
+                   })
