@@ -34,11 +34,16 @@ def detail(requset, user_id):
         return render(requset, 'payment/detail.html',
                       {'user': user,'balance' : balance,
                       'check_credit':check_credit} )
-def credit_repayment(requset, user_id):
+def credit_repayment(requset, user_id, credit_id):
     user = get_object_or_404(User, pk=user_id)
+    credit = get_object_or_404(Credit, user=user, pk = credit_id)
 
     check_credit = Credit.objects.filter(user = user).exists()
     return render(requset, 'payment/credit_repayment.html',
                   {'user': user,
                    'check_credit': check_credit,
+                   'credit' : credit
                    })
+def about(request):
+    about_us = 'Данное приложение разработано на фреймворке Django'
+    return render(request,'payment/about.html', {'about_us': about_us})
