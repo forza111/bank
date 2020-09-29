@@ -25,3 +25,9 @@ class Credit(models.Model):
     def __str__(self):
         return 'Кредит за {}. Осталось погасить {} '.\
             format(self.name_credit, self.credit)
+
+class Currency(models.Model):
+    usd = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
+    eur = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
+    def __str__(self):
+        return 'Валюта '
