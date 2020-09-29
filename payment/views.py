@@ -5,7 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django.template import loader
 
-from .models import User,Balance,Credit
+from .models import User,Balance,Credit,Currency
 
 class IndexView(generic.ListView):
     '''Shows userlist'''
@@ -47,3 +47,6 @@ def credit_repayment(requset, user_id, credit_id):
 def about(request):
     about_us = 'Данное приложение разработано на фреймворке Django'
     return render(request,'payment/about.html', {'about_us': about_us})
+
+
+

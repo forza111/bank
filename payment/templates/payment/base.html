@@ -20,7 +20,14 @@
     <a class="p-2 text-dark" href="{% url 'payment:about' %}">About</a>
 
   </nav>
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
+    {% if user.is_authenticated %}
+    <a class="btn btn-outline-primary" href=
+            "{% url 'logout'%}?next={{request.path}}">{{ user.get_username }}<br>Logout</br></a>
+
+    {% else %}
+    <a class="btn btn-outline-primary" href=
+            "{% url 'login'%}?next={{request.path}}">Login</a>
+    {% endif %}
 
 </div>
 

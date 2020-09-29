@@ -1,16 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 from django.utils import timezone
 
-class User(models.Model):
-    username = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
-    age = models.DateTimeField('Date of birth')
-    phone = models.CharField(max_length=16)
 
-    def __str__(self):
-        return self.username
 
 
 class Balance(models.Model):
@@ -31,3 +25,9 @@ class Credit(models.Model):
     def __str__(self):
         return 'Кредит за {}. Осталось погасить {} '.\
             format(self.name_credit, self.credit)
+
+class Currency(models.Model):
+    usd = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
+    eur = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
+    def __str__(self):
+        return 'Валюта '
