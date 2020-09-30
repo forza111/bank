@@ -46,14 +46,9 @@ def credit_repayment(requset, user_id, credit_id):
                    })
 def about(request):
     about_us = 'Данное приложение разработано на фреймворке Django'
-    return render(request,'payment/about.html', {'about_us': about_us})
+    last_currency = Money.objects.latest('pub_date')
+    return render(request,'payment/about.html', {'about_us': about_us, 'last_currency': last_currency})
 
 def money(request):
     last_currency = Money.objects.latest('pub_date')
-    return render(request, '/payment/base.html', {'last_currency': last_currency,})
-
-
-
-
-
-
+    return render(request, 'payment/base.html', {'last_currency': last_currency})
