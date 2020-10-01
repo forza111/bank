@@ -1,0 +1,25 @@
+{% extends 'payment/base.html' %}
+{% block title %}
+Sale_buy
+{% endblock %}
+
+{% block page_title %}
+Покупка/продажа валюты
+{% endblock %}
+
+{% block content %}
+<body class="container">
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Рубли</label><br>
+            <input type="number" name="balance_rub" />
+        </p>
+        <p>
+            <label>Долларыт</label><br>
+            <input type="number" name="balance_dol" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+{% endblock %}

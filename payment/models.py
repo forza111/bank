@@ -29,6 +29,8 @@ class Credit(models.Model):
 
 class Money(models.Model):
     usd = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
+    usd_sale = models.DecimalField(max_digits=5, decimal_places=2, default=01.00,name='USD Продажа банком')
+    usd_buy = models.DecimalField(max_digits=5, decimal_places=2, default=01.00,name='USD Покупка банком')
     eur = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
     pub_date = models.DateTimeField(default=timezone.now)
     def __str__(self):
