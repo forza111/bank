@@ -30,6 +30,9 @@ class Credit(models.Model):
 class Money(models.Model):
     usd = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
     eur = models.DecimalField(max_digits=5, decimal_places=2, default=01.00)
-    pub_date = models.DateTimeField(default=timezone.now())
+    pub_date = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return 'Котировка валют на сегодня'
+
+class Currency():
+    pass
