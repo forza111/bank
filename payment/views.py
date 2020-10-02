@@ -53,16 +53,25 @@ def money(request):
     return render(request, 'payment/base.html', {'last_currency': last_currency})
 
 def sale_buy(request,user_id):
-    user = get_object_or_404(User, pk=user_id)
+    """user = get_object_or_404(User, pk=user_id)
     last_currency = Money.objects.latest('pub_date')
     if request.method == 'POST':
         change_balance = Balance.objects.get(user = user)
         change_balance.balance_rub = request.POST.get("balance_rub")
         change_balance.balance_dol = request.POST.get("balance_dol")
         change_balance.save()
-        return render(request, 'payment/sale_buy.html', {'last_currency': last_currency,
-                                                         'change_balance' : change_balance,
-                                                         })
+        return render(request, 'payment/sale_buy.html', {
+            'last_currency': last_currency,
+            'change_balance' : change_balance,
+                                                         }
+                      )"""
+    user = get_object_or_404(User, pk=user_id)
+    balance = Balance.objects.get(user=user)
+    return render(request, 'payment/sale_buy.html', {
+        'user': user,
+        'balance': balance,
+    }
+                  )
 
 
 
