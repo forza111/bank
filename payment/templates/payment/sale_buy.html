@@ -9,7 +9,7 @@ Sale_buy
 
 {% block content %}
 <body class="container">
-    <form method="POST" action="create/">
+    <form action="{% url 'payment:change_sale_buy' user.id%}" method="POST" >
         {% csrf_token %}
         <p>
             <label>Рубли</label><br>

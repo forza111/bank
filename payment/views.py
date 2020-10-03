@@ -73,6 +73,16 @@ def sale_buy(request,user_id):
     }
                   )
 
+def change_sale_buy(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
+    balance = Balance.objects.get(user=user)
+    balance.balance_rub = balance.balance_rub + int(request.POST['balance_rub'])
+    balance.balance_dol = request.POST['balance_dol']
+    balance.save()
+    return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
+
+
+
 
 
 

@@ -9,5 +9,6 @@ urlpatterns=[
          name='credit_repayment'),
     path('about', views.about, name='about'),
     path('<int:user_id>/sale_buy', views.sale_buy, name='sale_buy'),
+    path('<int:user_id>/change_sale_buy', views.change_sale_buy, name='change_sale_buy'),
 
 ]
