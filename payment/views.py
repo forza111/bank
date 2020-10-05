@@ -53,18 +53,6 @@ def money(request):
     return render(request, 'payment/base.html', {'last_currency': last_currency})
 
 def sale_buy(request,user_id):
-    """user = get_object_or_404(User, pk=user_id)
-    last_currency = Money.objects.latest('pub_date')
-    if request.method == 'POST':
-        change_balance = Balance.objects.get(user = user)
-        change_balance.balance_rub = request.POST.get("balance_rub")
-        change_balance.balance_dol = request.POST.get("balance_dol")
-        change_balance.save()
-        return render(request, 'payment/sale_buy.html', {
-            'last_currency': last_currency,
-            'change_balance' : change_balance,
-                                                         }
-                      )"""
     user = get_object_or_404(User, pk=user_id)
     balance = Balance.objects.get(user=user)
     return render(request, 'payment/sale_buy.html', {
@@ -75,14 +63,23 @@ def sale_buy(request,user_id):
 
 def change_sale_buy(request,user_id):
     user = get_object_or_404(User, pk=user_id)
-    balance = Balance.objects.get(user=user)
-    balance.balance_rub = balance.balance_rub + int(request.POST['balance_rub'])
-    balance.balance_dol = request.POST['balance_dol']
-    balance.save()
-    return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
-
-
-
-
-
+    last_currency = Money.objects.latest('pub_date')
+    try:
+        balance = Balance.objects.get(user=user)
+    except(KeyError, Balance.DoesNotExist):
+        return render(request, 'payment/sale_buy.html',
+                      {
+                          'user': user,
+                          'error_message': 'У пользователя {} нет открытого счета в банке'.format(user)
+                      }
+                      )
+    else:
+        if int(request.POST['balance_dol']) > balance.balance_dol:
+            return render(request, 'payment/sale_buy.html',
+                            {'user': user, 'error_message ': 'Недостаточно средств'})
+        else:
+            balance.balance_dol = balance.balance_dol - int(request.POST['balance_dol'])
+            balance.balance_rub = balance.balance_rub + (int(request.POST['balance_dol'])*last_currency.usd)
+            balance.save()
+            return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
 

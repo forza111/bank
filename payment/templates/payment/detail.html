@@ -12,7 +12,14 @@ detail
 {% if error_message %}<p>{{error_message}}</p>
 {% else %}
 <p>{{balance.balance_rub}} RUB</p>
-<p>{{balance.balance_dol}} USD</p>
+<p>{{balance.balance_dol}} USD
+    {% if balance.balance_dol >= 1 %}
+    <a href="{% url 'payment:sale_buy' user.id %}"> Продать</a>
+    {% else %}
+    <a href="{% url 'payment:detail' user.id %}"> <font color="red">Продать</font></a>
+    <a><font color="red">недостаточно средств</font></a>
+    {% endif %}
+</p>
 <p>{{balance.balance_eur}} EUR</p>
 {% endif%}
 

@@ -8,18 +8,19 @@ Sale_buy
 {% endblock %}
 
 {% block content %}
+{% if error_message %}
+{{ error_message }}
+{% else %}
 <body class="container">
     <form action="{% url 'payment:change_sale_buy' user.id%}" method="POST" >
         {% csrf_token %}
         <p>
-            <label>Рубли</label><br>
-            <input type="number" name="balance_rub" />
-        </p>
-        <p>
             <label>Доллары</label><br>
             <input type="number" name="balance_dol" />
         </p>
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Купить" >
     </form>
 </body>
+{% endif %}
 {% endblock %}
+
