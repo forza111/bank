@@ -54,10 +54,8 @@ def money(request):
 
 def sale_buy(request,user_id):
     user = get_object_or_404(User, pk=user_id)
-    balance = Balance.objects.get(user=user)
     return render(request, 'payment/sale_buy.html', {
         'user': user,
-        'balance': balance,
     }
                   )
 

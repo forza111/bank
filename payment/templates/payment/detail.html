@@ -16,12 +16,18 @@ detail
     {% if balance.balance_dol >= 1 %}
     <a href="{% url 'payment:sale_buy' user.id %}"> Продать</a>
     {% else %}
-    <a href="{% url 'payment:detail' user.id %}"> <font color="red">Продать</font></a>
+    <a href="{% url 'payment:detail' user.id %}"> Продать</a>
+    <a><font color="red">недостаточно средств</font></a>
+    {% endif %}</p>
+
+<p>{{balance.balance_eur}} EUR
+    {% if balance.balance_eur >= 1 %}
+    <a title="Продать валюту банку" href="{% url 'payment:sale_buy' user.id %}"> Продать</a>
+    {% else %}
+    <a href="{% url 'payment:detail' user.id %}"> Продать</a>
     <a><font color="red">недостаточно средств</font></a>
     {% endif %}
-</p>
-<p>{{balance.balance_eur}} EUR</p>
-{% endif%}
+{% endif%}</p>
 
 <h4>Информация по кредитам</h4>
 {% if check_credit %}
