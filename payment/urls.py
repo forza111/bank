@@ -8,7 +8,8 @@ urlpatterns=[
     path('<int:user_id>/credit_repayment', views.credit_repayment,
          name='credit_repayment'),
     path('about', views.about, name='about'),
-    path('<int:user_id>/sale_buy', views.sale_buy, name='sale_buy'),
-    path('<int:user_id>/change_sale_buy', views.change_sale_buy, name='change_sale_buy'),
-
+    path('<int:user_id>/sale_dol', views.sale_dol, name='sale_dol'),
+    path('<int:user_id>/sale_eur', views.sale_eur, name='sale_eur'),
+    path('<int:user_id>/change_sale_dol', views.change_sale_dol, name='change_sale_dol'),
+    path('<int:user_id>/change_sale_eur', views.change_sale_eur, name='change_sale_eur'),
 ]

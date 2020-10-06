@@ -52,20 +52,20 @@ def money(request):
     last_currency = Money.objects.latest('pub_date')
     return render(request, 'payment/base.html', {'last_currency': last_currency})
 
-def sale_buy(request,user_id):
+def sale_dol(request,user_id):
     user = get_object_or_404(User, pk=user_id)
-    return render(request, 'payment/sale_buy.html', {
+    return render(request, 'payment/sale_dol.html', {
         'user': user,
     }
                   )
 
-def change_sale_buy(request,user_id):
+def change_sale_dol(request,user_id):
     user = get_object_or_404(User, pk=user_id)
     last_currency = Money.objects.latest('pub_date')
     try:
         balance = Balance.objects.get(user=user)
     except(KeyError, Balance.DoesNotExist):
-        return render(request, 'payment/sale_buy.html',
+        return render(request, 'payment/sale_dol.html',
                       {
                           'user': user,
                           'error_message': 'У пользователя {} нет открытого счета в банке'.format(user)
@@ -73,7 +73,7 @@ def change_sale_buy(request,user_id):
                       )
     else:
         if int(request.POST['balance_dol']) > balance.balance_dol:
-            return render(request, 'payment/sale_buy.html',
+            return render(request, 'payment/sale_dol.html',
                             {'user': user, 'error_message ': 'Недостаточно средств'})
         else:
             balance.balance_dol = balance.balance_dol - int(request.POST['balance_dol'])
@@ -81,3 +81,31 @@ def change_sale_buy(request,user_id):
             balance.save()
             return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
 
+def sale_eur(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
+    return render(request, 'payment/sale_eur.html', {
+        'user': user,
+    }
+                  )
+
+def change_sale_eur(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
+    last_currency = Money.objects.latest('pub_date')
+    try:
+        balance = Balance.objects.get(user=user)
+    except(KeyError, Balance.DoesNotExist):
+        return render(request, 'payment/sale_eur.html',
+                      {
+                          'user': user,
+                          'error_message': 'У пользователя {} нет открытого счета в банке'.format(user)
+                      }
+                      )
+    else:
+        if int(request.POST['balance_eur']) > balance.balance_eur:
+            return render(request, 'payment/sale_eur.html',
+                            {'user': user, 'error_message ': 'Недостаточно средств'})
+        else:
+            balance.balance_eur = balance.balance_eur - int(request.POST['balance_eur'])
+            balance.balance_rub = balance.balance_rub + (int(request.POST['balance_eur'])*last_currency.eur)
+            balance.save()
+            return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))

@@ -12,13 +12,13 @@ Sale_buy
 {{ error_message }}
 {% else %}
 <body class="container">
-    <form action="{% url 'payment:change_sale_buy' user.id%}" method="POST" >
+    <form action="{% url 'payment:change_sale_eur' user.id%}" method="POST" >
         {% csrf_token %}
         <p>
-            <label>Доллары</label><br>
-            <input type="number" name="balance_dol" />
+            <label>Евро</label><br>
+            <input type="number" name="balance_eur" />
         </p>
-        <input type="submit" value="Купить" >
+        <input type="submit" value="Продать" >
     </form>
 </body>
 {% endif %}
