@@ -34,9 +34,9 @@ def detail(request, user_id):
         return render(request, 'payment/detail.html',
                       {'user': user,'balance' : balance,
                       'check_credit':check_credit} )
-def credit_repayment(request, user_id, credit_id):
+def credit_repayment(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    credit = get_object_or_404(Credit, user=user, pk = credit_id)
+    credit = get_object_or_404(Credit, user=user)
 
     check_credit = Credit.objects.filter(user = user).exists()
     return render(request, 'payment/credit_repayment.html',
