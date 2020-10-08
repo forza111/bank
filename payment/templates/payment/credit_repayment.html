@@ -9,5 +9,15 @@ repayment
 
 {% block content %}
 {{credit.name_credit}} {{credit.credit}} РУБ
+<body class="container">
+    <form action="{% url 'payment:change_credit_repayment' user.id credit.id%}" method="POST" >
+        {% csrf_token %}
+        <p>
+            <label>Оплата</label><br>
+            <input type="number" name="repayment_rub" />
+        </p>
+        <input type="submit" value="Внести средства" >
+    </form>
+</body>
 
 {% endblock %}

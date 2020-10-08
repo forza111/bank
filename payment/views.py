@@ -34,9 +34,9 @@ def detail(request, user_id):
         return render(request, 'payment/detail.html',
                       {'user': user,'balance' : balance,
                       'check_credit':check_credit} )
-def credit_repayment(request, user_id):
+def credit_repayment(request, user_id, credit_id):
     user = get_object_or_404(User, pk=user_id)
-    credit = get_object_or_404(Credit, user=user)
+    credit = get_object_or_404(Credit, user=user, pk=credit_id)
 
     check_credit = Credit.objects.filter(user = user).exists()
     return render(request, 'payment/credit_repayment.html',
@@ -109,3 +109,16 @@ def change_sale_eur(request,user_id):
             balance.balance_rub = balance.balance_rub + (int(request.POST['balance_eur'])*last_currency.eur)
             balance.save()
             return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
+
+def change_credit_repayment(request,user_id,credit_id):
+    user = get_object_or_404(User, pk=user_id)
+    credit = get_object_or_404(Credit, user=user, pk=credit_id)
+    balance = Balance.objects.get(user=user)
+
+    balance.balance_rub = balance.balance_rub - (int(request.POST['repayment_rub']))
+    balance.save()
+    credit.credit = credit.credit - (int(request.POST['repayment_rub']))
+    credit.save()
+    return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
+
+
