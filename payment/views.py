@@ -115,10 +115,19 @@ def change_credit_repayment(request,user_id,credit_id):
     credit = get_object_or_404(Credit, user=user, pk=credit_id)
     balance = Balance.objects.get(user=user)
 
-    balance.balance_rub = balance.balance_rub - (int(request.POST['repayment_rub']))
-    balance.save()
-    credit.credit = credit.credit - (int(request.POST['repayment_rub']))
-    credit.save()
-    return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
+    if int(request.POST['repayment_rub']) > balance.balance_rub:
+        return render(request, 'payment/credit_repayment.html',
+                      {
+                        'user': user,
+                       'credit':credit,
+                       'error_message ': 'Недостаточно средств'
+                       })
+    else:
+        balance.balance_rub = balance.balance_rub - (int(request.POST['repayment_rub']))
+        balance.save()
+        credit.credit = credit.credit - (int(request.POST['repayment_rub']))
+        credit.save()
+        return HttpResponseRedirect(reverse('payment:detail', args=(user.id,)))
+
 
 
