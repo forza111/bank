@@ -8,6 +8,8 @@ detail
 {% endblock %}
 
 {% block content %}
+<p>USD {{last_currency.usd}} EUR {{last_currency.eur}}</p>
+
 <h4>Информация по доступным средствам</h4>
 {% if error_message %}<p>{{error_message}}</p>
 {% else %}

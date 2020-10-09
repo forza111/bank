@@ -27,13 +27,15 @@ def detail(request, user_id):
                       {
                           'user' : user,
                           'error_message': 'У пользователя {} нет открытого счета в банке'.format(user),
-                          'check_credit':check_credit
+                          'check_credit':check_credit,
+                          'last_currency': Money.objects.latest('pub_date')
                       }
                       )
     else:
         return render(request, 'payment/detail.html',
                       {'user': user,'balance' : balance,
-                      'check_credit':check_credit} )
+                      'check_credit':check_credit,
+                       'last_currency':Money.objects.latest('pub_date')} )
 def credit_repayment(request, user_id, credit_id):
     user = get_object_or_404(User, pk=user_id)
     credit = get_object_or_404(Credit, user=user, pk=credit_id)
@@ -45,12 +47,15 @@ def credit_repayment(request, user_id, credit_id):
                    'credit' : credit
                    })
 def about(request):
-    about_us = 'Данное приложение разработано на фреймворке Django'
+    about_us = 'Данное приложение разработано на фреймворке Django. ' \
+               'Для более подробной информацией по поводу использования данного приложения обращайтесь по адресу' \
+               ' https://github.com/forza111/bank'
+
     return render(request,'payment/about.html', {'about_us': about_us})
 
-def money(request):
+'''def money(request):
     last_currency = Money.objects.latest('pub_date')
-    return render(request, 'payment/base.html', {'last_currency': last_currency})
+    return render(request, 'payment/about.html', {'last_currency': last_currency})'''
 
 def sale_dol(request,user_id):
     user = get_object_or_404(User, pk=user_id)
